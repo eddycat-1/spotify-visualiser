@@ -1,11 +1,20 @@
 import React from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
-import { useRef } from "react";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useRef, useEffect } from "react";
 
-export const Model = ({ audioData, analyser }) => {
+export const Model = ({ audioData, analyser, url }) => {
+  const model = useLoader(GLTFLoader, url);
+
+  useEffect(() => {
+    if (model.scene) {
+      // Adjust the model as needed
+    }
+  }, [model]);
+
   const ref = useRef();
-  const { scene } = useGLTF("little_chiken/scene.gltf");
+  // const { scene } = useGLTF("little_chiken/scene.gltf");
 
   // Update the scale every frame
   useFrame(() => {
@@ -20,5 +29,5 @@ export const Model = ({ audioData, analyser }) => {
     }
   });
 
-  return <primitive ref={ref} object={scene} dispose={null} />;
+  return <primitive ref={ref} object={model.scene} dispose={null} />;
 };
