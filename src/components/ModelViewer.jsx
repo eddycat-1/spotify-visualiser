@@ -3,8 +3,6 @@ import { Canvas } from "@react-three/fiber";
 import { Model } from "./Model";
 import { OrbitControls } from "@react-three/drei";
 import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
 
 export const ModelViewer = ({ setModel }) => {
   const [modelUrl, setModelUrl] = useState(null);
@@ -19,15 +17,17 @@ export const ModelViewer = ({ setModel }) => {
 
   return (
     <div className="header">
-      <InputGroup>
-        <Form.Control
-          onChange={handleFileChange}
-          placeholder="Upload a Model"
-          accept=".glb,.gltf"
-          aria-label="Model Input"
-          aria-describedby="Model Input"
-        />
-      </InputGroup>
+      <div class="input-group mb-3">
+        <div class="custom-file">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="inputGroupFile01"
+            onChange={handleFileChange}
+            accept=".glb,.gltf"
+          />
+        </div>
+      </div>
 
       {modelUrl && (
         <Canvas style={{ height: "100%" }}>
